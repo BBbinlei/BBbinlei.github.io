@@ -28,6 +28,10 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      - name: Include custom domain CNAME in Pages artifact
+        run: |
+          cp CNAME out/CNAME
+          cp public/CNAME out/CNAME
       - uses: actions/upload-pages-artifact@v5
         with:
           path: out
