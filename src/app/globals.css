@@ -1,0 +1,702 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-royal-base: #060b18;
+  --color-royal-card: rgba(12, 21, 46, 0.72);
+  --color-gold-accent: #fbbf24;
+  --color-azure-accent: #38bdf8;
+  --color-marble-white: #ffffff;
+}
+
+body {
+  background-color: var(--color-royal-base);
+  color: #f8fafc;
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+  overflow-x: hidden;
+  selection-background-color: rgba(245, 158, 11, 0.35);
+  selection-color: #ffffff;
+}
+
+/* 白银圣都 · 水晶大理石磨砂面板 */
+.glass-panel {
+  background: rgba(12, 21, 46, 0.75);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid rgba(245, 158, 11, 0.22);
+  box-shadow: 0 12px 36px 0 rgba(4, 9, 24, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.16);
+}
+
+.glass-panel-hover {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-panel-hover:hover {
+  background: rgba(17, 31, 68, 0.85);
+  border-color: rgba(251, 191, 36, 0.6);
+  box-shadow: 0 16px 44px 0 rgba(4, 9, 24, 0.65), 0 0 28px -4px rgba(245, 158, 11, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.28);
+  transform: translateY(-2px);
+}
+
+/* 白银之城宫殿柱廊同款：皇家蔚蓝与金边挂旗 (Royal Blue Pennant Tag) */
+.royal-banner {
+  background: linear-gradient(180deg, #1e3a8a 0%, #111e47 100%);
+  border: 1px solid rgba(251, 191, 36, 0.5);
+  color: #fef08a;
+  box-shadow: 0 4px 14px rgba(7, 15, 40, 0.5), inset 0 1px 0 rgba(254, 240, 138, 0.35);
+}
+
+/* 宫殿金色描金交互按钮 */
+.btn-royal-gold {
+  position: relative;
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.25) 0%, rgba(217, 119, 6, 0.12) 100%);
+  border: 1px solid rgba(251, 191, 36, 0.65);
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.25), inset 0 1px 0 0 rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  transition: all 0.3s ease;
+}
+
+.btn-royal-gold:hover {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.4) 0%, rgba(217, 119, 6, 0.25) 100%);
+  border-color: rgba(253, 224, 71, 0.95);
+  box-shadow: 0 0 32px rgba(245, 158, 11, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+/* 苍穹天青飞瀑交互按钮 */
+.btn-royal-azure {
+  background: rgba(15, 28, 65, 0.65);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.2), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
+  color: #f8fafc;
+  transition: all 0.3s ease;
+}
+
+.btn-royal-azure:hover {
+  background: rgba(30, 58, 138, 0.7);
+  border-color: rgba(125, 211, 252, 0.8);
+  color: #ffffff;
+  box-shadow: 0 0 28px rgba(56, 189, 248, 0.45);
+  transform: translateY(-1px);
+}
+
+/* 兼容原按钮名 */
+.btn-moonlight {
+  @apply btn-royal-gold;
+}
+
+.btn-ghost-silver {
+  @apply btn-royal-azure;
+}
+
+/* Pretext 专有 CSS 类（与 Pretext 测量参数 100% 像素级对齐） */
+.project-card-desc {
+  font-family: 'Inter', 'PingFang SC', sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0;
+  overflow-wrap: break-word;
+  color: #cbd5e1;
+}
+
+/* 皇家金色与深蓝滚轮滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #060b18;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(24, 43, 93, 0.8);
+  border-radius: 4px;
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(245, 158, 11, 0.5);
+}
+
+/* ==========================================================================
+   Pretext 动画专用系统 (Pretext Animation System)
+   ========================================================================== */
+
+/* 旗帜专用高精度衬线字体栈 */
+.pt-banner-title {
+  font-family: 'Cinzel', 'Noto Serif SC', serif;
+}
+
+/* 首屏与就绪态可见性控制 */
+html.pt-js:not(.pt-timeout) .pt-pending {
+  visibility: hidden;
+}
+
+html.pt-js:not(.pt-timeout) .pt-lamp-pending {
+  opacity: 0.28;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.pt-js:not(.pt-timeout) .pt-pending {
+    visibility: visible !important;
+  }
+  html.pt-js:not(.pt-timeout) .pt-lamp-pending {
+    opacity: 1 !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   方案 F · 暮色点灯 (LampLitText)
+   -------------------------------------------------------------------------- */
+@property --pt-p {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: -15%;
+}
+
+.pt-lamp-root {
+  position: relative;
+  display: block;
+}
+
+.pt-lamp-line {
+  position: relative;
+  display: block;
+  width: max-content;
+  white-space: pre;
+}
+
+[data-align="center"] .pt-lamp-line {
+  margin-inline: auto;
+}
+
+.pt-lamp-text {
+  display: block;
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    #000 calc(var(--pt-p, -15%) - 10%),
+    rgba(0, 0, 0, 0.28) calc(var(--pt-p, -15%) + 6%)
+  );
+  mask-image: linear-gradient(
+    90deg,
+    #000 calc(var(--pt-p, -15%) - 10%),
+    rgba(0, 0, 0, 0.28) calc(var(--pt-p, -15%) + 6%)
+  );
+}
+
+.pt-lamp-spark {
+  position: absolute;
+  top: 50%;
+  left: var(--pt-p, -15%);
+  transform: translate(-50%, -50%);
+  width: 1.8em;
+  height: 1.8em;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle,
+    var(--pt-lamp, #fcd34d) 0%,
+    rgba(252, 211, 77, 0.45) 40%,
+    transparent 75%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.is-lit .pt-lamp-line {
+  animation: pt-lamp-sweep var(--pt-dur, 800ms) cubic-bezier(0.45, 0.05, 0.35, 1) var(--pt-delay, 0ms) both;
+}
+
+.is-lit .pt-lamp-spark {
+  animation: pt-spark-fade var(--pt-dur, 800ms) cubic-bezier(0.45, 0.05, 0.35, 1) var(--pt-delay, 0ms) both;
+}
+
+.is-lit .pt-lamp-text {
+  animation: pt-afterglow 1600ms ease-out calc(var(--pt-delay, 0ms) + var(--pt-dur, 800ms) * 0.5) both;
+}
+
+.is-static .pt-lamp-line,
+.is-static .pt-lamp-spark,
+.is-static .pt-lamp-text {
+  animation: none !important;
+  --pt-p: 120% !important;
+  opacity: 1 !important;
+  -webkit-mask-image: none !important;
+  mask-image: none !important;
+}
+
+@keyframes pt-lamp-sweep {
+  from {
+    --pt-p: -15%;
+  }
+  to {
+    --pt-p: 120%;
+  }
+}
+
+@keyframes pt-spark-fade {
+  0% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pt-afterglow {
+  0% {
+    text-shadow: 0 0 14px var(--pt-lamp-soft, rgba(252, 211, 77, 0.55));
+  }
+  100% {
+    text-shadow: 0 0 0 transparent;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   方案 D · 瀑布倾泻 (CascadeText)
+   -------------------------------------------------------------------------- */
+.pt-cascade-line {
+  position: relative;
+  display: block;
+  width: max-content;
+  white-space: pre;
+  transform-origin: top center;
+}
+
+.pt-cascade-mist {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 10px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.4) 0%,
+    transparent 70%
+  );
+  filter: blur(4px);
+  pointer-events: none;
+  opacity: 0;
+  transform-origin: center center;
+}
+
+.is-cascading .pt-cascade-line {
+  animation: pt-cascade-drop 900ms cubic-bezier(0.2, 0.8, 0.2, 1) var(--pt-delay, 0ms) both;
+}
+
+.is-cascading .pt-cascade-mist {
+  animation: pt-mist-puff 700ms ease-out calc(var(--pt-delay, 0ms) + 720ms) both;
+}
+
+.is-cascade-static .pt-cascade-line {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  filter: none !important;
+  color: inherit !important;
+}
+
+.is-cascade-static .pt-cascade-mist {
+  display: none !important;
+}
+
+@keyframes pt-cascade-drop {
+  from {
+    opacity: 0;
+    transform: translateY(-18px) scaleY(1.25);
+    filter: blur(6px);
+    color: #7dd3fc;
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    color: inherit;
+  }
+}
+
+@keyframes pt-mist-puff {
+  0% {
+    opacity: 0;
+    transform: scaleX(0.6);
+  }
+  40% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(1.1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   方案 C · 旗帜垂落 (BannerHeading)
+   -------------------------------------------------------------------------- */
+.pt-banner-rod {
+  transform-origin: center center;
+}
+
+.is-banner-unfurling .pt-banner-rod {
+  animation: pt-rod-expand 450ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.is-banner-unfurled .pt-banner-rod {
+  transform: scaleX(1);
+}
+
+.pt-banner-cloth {
+  transform-origin: top center;
+}
+
+.is-banner-unfurling .pt-banner-cloth {
+  animation: pt-banner-unfurl 1000ms cubic-bezier(0.22, 1, 0.36, 1) 450ms both;
+}
+
+.is-banner-unfurled .pt-banner-cloth {
+  animation: pt-banner-sway 7s ease-in-out infinite;
+}
+
+.is-banner-unfurling .pt-banner-text-line {
+  animation: pt-banner-line-reveal 500ms cubic-bezier(0.22, 1, 0.36, 1) var(--pt-line-delay, 0ms) both;
+}
+
+.is-banner-unfurling .pt-banner-emblem {
+  animation: pt-emblem-fade 400ms cubic-bezier(0.22, 1, 0.36, 1) 1450ms both;
+}
+
+.pt-banner-shimmer {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    135deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.12) 50%,
+    transparent 60%
+  );
+  pointer-events: none;
+}
+
+.is-banner-unfurled .pt-banner-shimmer {
+  animation: pt-silk-shimmer 9s cubic-bezier(0.4, 0, 0.2, 1) 2s infinite;
+}
+
+@keyframes pt-rod-expand {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes pt-banner-unfurl {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes pt-banner-line-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pt-emblem-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pt-banner-sway {
+  0%, 100% {
+    transform: rotate(-0.5deg);
+  }
+  50% {
+    transform: rotate(0.5deg);
+  }
+}
+
+@keyframes pt-silk-shimmer {
+  0% {
+    transform: translate(-30%, -30%);
+    opacity: 0;
+  }
+  8% {
+    opacity: 1;
+  }
+  16% {
+    transform: translate(30%, 30%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(30%, 30%);
+    opacity: 0;
+  }
+}
+
+
+/* =====================================================================
+   开场加载动画：破晓（Daybreak）+ 云海拉开（Cloud-Sea Curtain Parting）
+   与上方的 Pretext 文字动画系统（pt-* 前缀）完全独立，命名统一用 splash-* 前缀。
+   ===================================================================== */
+
+html.splash-lock,
+html.splash-lock body {
+  overflow: hidden;
+  height: 100%;
+}
+
+.splash-root {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  background: #060b18;
+  outline: none;
+}
+
+.splash-sky {
+  position: absolute;
+  inset: 0;
+}
+
+.splash-foreground {
+  position: absolute;
+  inset: 0;
+  transition: opacity 300ms ease;
+  opacity: 1;
+}
+
+.splash-root[data-mode="short"] .splash-foreground {
+  transition-duration: 250ms;
+}
+
+.splash-root[data-phase="revealing-prep"] .splash-foreground,
+.splash-root[data-phase="revealing"] .splash-foreground {
+  opacity: 0;
+}
+
+/* 减少动效：没有 revealing-prep 这个中间态，isReady 达成即直接进入一次性淡出 */
+.splash-foreground--plain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 500ms ease;
+}
+.splash-root[data-reduced="true"][data-phase="revealing"] .splash-foreground--plain,
+.splash-root[data-reduced="true"][data-phase="done"] .splash-foreground--plain {
+  opacity: 0;
+}
+
+.splash-moon {
+  position: absolute;
+  top: 12%;
+  right: 22%;
+  width: 64px;
+  height: 64px;
+  border-radius: 9999px;
+  background: radial-gradient(circle at 35% 35%, #fefce8 0%, #fef9c3 40%, #fde047 75%, transparent 100%);
+  box-shadow:
+    0 0 24px 6px rgba(253, 224, 71, 0.35),
+    0 0 60px 20px rgba(253, 224, 71, 0.12);
+  transition: opacity 600ms ease-out;
+  pointer-events: none;
+}
+
+.splash-copy {
+  position: absolute;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: min(90vw, 420px);
+}
+
+.splash-wordmark {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  color: #f8fafc;
+  padding-left: 0.35em; /* 视觉居中：letter-spacing 会让文字整体偏右 */
+}
+
+.splash-subtitle {
+  margin-top: 0.75rem;
+  font-family: "Noto Serif SC", serif;
+  font-size: 0.875rem;
+  letter-spacing: 0.5em;
+  padding-left: 0.5em;
+  color: rgba(125, 211, 252, 0.8);
+}
+
+.splash-progress-track {
+  margin-top: 2rem;
+  width: min(280px, 60vw);
+  height: 2px;
+  border-radius: 1px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.splash-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #d97706, #fbbf24, #fef08a);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.6);
+  transition: width 120ms linear;
+}
+
+.splash-progress-label {
+  margin-top: 0.6rem;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: #fbbf24;
+}
+
+.splash-stage-label {
+  margin-top: 0.45rem;
+  font-size: 0.6875rem;
+  letter-spacing: 0.1em;
+  color: rgba(253, 230, 138, 0.72);
+  font-family: 'Inter', -apple-system, sans-serif;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+  min-height: 1.25rem;
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+
+.splash-skyline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 38vh;
+}
+
+.splash-window {
+  transition: opacity 400ms ease-out;
+}
+
+/* 云幕面板：loading 阶段完全不可见（opacity:0），revealing-prep 时与前景做一次
+   淡入/淡出的交叉淡化（此时 transform 仍在原位，尚未开始拉开），
+   直到 revealing 阶段才开始真正的左右拉开。opacity 的目标值在
+   revealing-prep → revealing 之间不变，过渡不会被打断，短版同理。 */
+.splash-cloud-panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background:
+    radial-gradient(ellipse 60% 40% at 30% 20%, rgba(255, 255, 255, 0.9), transparent 60%),
+    radial-gradient(ellipse 50% 35% at 70% 60%, rgba(226, 232, 240, 0.85), transparent 65%),
+    radial-gradient(ellipse 70% 50% at 50% 90%, rgba(203, 213, 225, 0.9), transparent 70%),
+    linear-gradient(180deg, #f8fafc 0%, #e2e8f0 60%, #cbd5e1 100%);
+  filter: blur(2px);
+  opacity: 0;
+  transform: translateX(0);
+  transition:
+    opacity 300ms ease,
+    transform 900ms cubic-bezier(0.65, 0, 0.35, 1);
+  will-change: opacity, transform;
+}
+
+.splash-cloud-panel--left {
+  left: 0;
+}
+
+.splash-cloud-panel--right {
+  right: 0;
+  transition-delay: 0ms, 60ms; /* 对应 opacity、transform 两个属性各自的延迟 */
+}
+
+.splash-root[data-phase="revealing-prep"] .splash-cloud-panel,
+.splash-root[data-phase="revealing"] .splash-cloud-panel {
+  opacity: 1;
+}
+
+.splash-root[data-phase="revealing"] .splash-cloud-panel--left {
+  transform: translateX(-100%);
+}
+.splash-root[data-phase="revealing"] .splash-cloud-panel--right {
+  transform: translateX(100%);
+}
+
+.splash-root[data-mode="short"] .splash-cloud-panel {
+  transition-duration: 250ms, 350ms;
+}
+.splash-root[data-mode="short"] .splash-cloud-panel--right {
+  transition-delay: 0ms, 0ms;
+}
+
+.splash-skip {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1;
+  font-size: 0.75rem;
+  color: rgba(226, 232, 240, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  padding: 6px 14px;
+  background: rgba(6, 11, 24, 0.3);
+  backdrop-filter: blur(8px);
+  opacity: 0;
+  animation: splash-skip-in 400ms ease forwards;
+  transition:
+    color 200ms ease,
+    border-color 200ms ease;
+  cursor: pointer;
+}
+.splash-skip:hover {
+  color: #fef08a;
+  border-color: rgba(251, 191, 36, 0.6);
+}
+
+@keyframes splash-skip-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .splash-foreground,
+  .splash-foreground--plain,
+  .splash-cloud-panel,
+  .splash-moon,
+  .splash-window {
+    transition-duration: 0ms !important;
+    animation: none !important;
+  }
+}
